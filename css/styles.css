@@ -1,9 +1,93 @@
 /* ─────────────────────────────────────────────────────────────
-   TABLE
+   ROOT THEME
    ───────────────────────────────────────────────────────────── */
 
+:root {
+  --c-bg: #0d0900;
+  --c-surface: #1a1200;
+  --c-surface2: #221800;
+  --c-surface3: #2e2200;
+  --c-border: #3a2e00;
+  --c-text: #f0e8cc;
+  --c-accent: #d09020;
+
+  --radius: 10px;
+  --transition: 0.2s ease;
+  --shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
 /* ─────────────────────────────────────────────────────────────
-   TABLE
+   HEADER
+   ───────────────────────────────────────────────────────────── */
+
+.sc-header {
+  padding: 24px;
+  text-align: center;
+}
+
+.sc-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.sc-subtitle {
+  margin-top: 6px;
+  opacity: 0.8;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FORM SECTIONS
+   ───────────────────────────────────────────────────────────── */
+
+.sc-section {
+  background: var(--c-surface);
+  padding: 20px;
+  margin: 16px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.sc-section h2 {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--c-border);
+  background: var(--c-surface2);
+  color: var(--c-text);
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--c-accent);
+  box-shadow: 0 0 0 3px rgba(208, 144, 32, 0.14);
+  outline: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TABLE (Availability)
    ───────────────────────────────────────────────────────────── */
 
 .sc-table {
@@ -20,6 +104,12 @@
   font-weight: 600;
 }
 
+.sc-table td {
+  padding: 14px 10px; /* Increased for mobile readability */
+  border-bottom: 1px solid var(--c-border);
+}
+
+/* Mobile‑friendly select dropdowns */
 .sc-table select {
   width: 100%;
   padding: 14px;
@@ -29,8 +119,108 @@
   -webkit-appearance: none;
 }
 
-
-
 /* ─────────────────────────────────────────────────────────────
    BUTTONS
    ───────────────────────────────────────────────────────────── */
+
+.sc-btn-primary,
+.sc-btn-secondary {
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--radius);
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 10px;
+}
+
+.sc-btn-primary {
+  background: var(--c-accent);
+  color: #000;
+  font-weight: 600;
+}
+
+.sc-btn-primary:hover {
+  opacity: 0.9;
+}
+
+.sc-btn-secondary {
+  background: var(--c-surface3);
+  color: var(--c-text);
+}
+
+.sc-btn-secondary:hover {
+  background: var(--c-surface2);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SUCCESS SCREEN
+   ───────────────────────────────────────────────────────────── */
+
+.sc-success-screen {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TOASTS
+   ───────────────────────────────────────────────────────────── */
+
+.sc-toast-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 400px;
+  z-index: 9999;
+}
+
+.sc-toast {
+  background: var(--c-surface3);
+  padding: 14px;
+  border-radius: var(--radius);
+  margin-top: 10px;
+  text-align: center;
+  border: 1px solid var(--c-border);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.sc-toast-error {
+  border-color: #ff4d4d;
+  color: #ffb3b3;
+}
+
+.sc-toast.fade {
+  opacity: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   MOBILE RESPONSIVE
+   ───────────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .sc-header {
+    padding: 0 18px;
+  }
+
+  .sc-section {
+    margin: 12px;
+    padding: 18px;
+  }
+
+  .sc-table td {
+    padding: 12px 8px;
+  }
+
+  .sc-table select {
+    font-size: 15px;
+    min-height: 44px;
+  }
+}
