@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!-- ProductivityByPhil — Childcare & Early Learning Edition - SECURE PWA -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
+<meta name="description" content="Secure offline-first availability submission tool for childcare educators.">
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+
+<!-- iOS Support -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Childcare Roster">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%230d0900' width='180' height='180'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='90' font-family='system-ui'>🧒</text></svg>">
+
+<!-- Theme & Security -->
+<meta name="theme-color" content="#0d0900">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'none';">
+
+<!-- Prevent MIME type sniffing -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+<!-- Referrer policy: no referrer when navigating -->
+<meta name="referrer" content="no-referrer">
+
+<title>Childcare — Submit Your Availability</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="sc-header">
+  <div class="sc-brand">
+    <div class="sc-logo">🧒</div>
+    <div>
+      <div class="sc-brand-name">Childcare Roster</div>
+      <div class="sc-brand-sub">EDUCATOR AVAILABILITY FORM</div>
+    </div>
+  </div>
+  <div class="sc-version">v2.1 &middot; SECURE PWA</div>
+</header>
+
+<div id="sc-form-area">
+  <div class="sc-hero">
+    <div class="sc-eyebrow">Tell us when you&#8217;re available to work</div>
+    <h2>Submit Your <em>Weekly</em><br>Availability</h2>
+    <p class="sc-hero-desc">Fill in your details, set your availability for each day, then click the button &mdash; your <code style="font-family:'DM Mono',monospace;font-size:12px;color:var(--c-accent)">.json</code> file downloads automatically and your email app opens ready to send to your centre director.</p>
+  </div>
+
+  <div class="sc-how">
+    <div class="sc-how-inner">
+      <div class="sc-how-step">
+        <div class="sc-how-num">1</div>
+        <div class="sc-how-text"><strong>Fill in this form</strong><span>Enter your details and set your availability for each day of the week.</span></div>
+      </div>
+      <div class="sc-how-step">
+        <div class="sc-how-num">2</div>
+        <div class="sc-how-text"><strong>Click Submit</strong><span>Your availability <code style="font-family:'DM Mono',monospace;font-size:10px">.json</code> file downloads to your device automatically.</span></div>
+      </div>
+      <div class="sc-how-step">
+        <div class="sc-how-num">3</div>
+        <div class="sc-how-text"><strong>Attach &amp; Send</strong><span>An email to your centre director opens &mdash; attach the file and hit Send.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <main class="sc-main">
+
+    <div class="sc-card">
+      <div class="sc-card-head">
+        <div class="sc-card-icon">⚙️</div>
+        <div>
+          <div class="sc-card-title">Director / Roster Coordinator Setup</div>
+          <div class="sc-card-sub">Pre-filled by centre director before distribution to educators</div>
+        </div>
+      </div>
+      <div class="sc-config-banner">
+        <div class="sc-config-banner-icon">ℹ️</div>
+        <div>Enter the centre director's or roster coordinator's email address. This is who your availability file will be sent to. If you're unsure, ask your room leader or assistant director.</div>
+      </div>
+      <div class="sc-group">
+        <label class="sc-label" for="sc-manager-email">Send To: Centre Director / Roster Coordinator Email <span class="sc-required">*</span></label>
+        <input class="sc-input" type="email" id="sc-manager-email" placeholder="Enter director's email address" value="" maxlength="150" autocomplete="off">
+        <div class="sc-err" id="sc-manager-email-err"></div>
+      </div>
+    </div>
+
+    <div class="sc-card">
+      <div class="sc-card-head">
+        <div class="sc-card-icon">🧒</div>
+        <div>
+          <div class="sc-card-title">Your Details</div>
+          <div class="sc-card-sub">Enter your name exactly as it appears on the centre roster</div>
+        </div>
+      </div>
+      <div class="sc-grid">
+        <div class="sc-group full">
+          <label class="sc-label" for="sc-name">Full Name <span class="sc-required">*</span></label>
+          <input class="sc-input" type="text" id="sc-name" placeholder="e.g. Amelia Chen" autocomplete="name" maxlength="100">
+          <div class="sc-err" id="sc-name-err"></div>
+        </div>
+        <div class="sc-group">
+          <label class="sc-label" for="sc-email">Your Email <span class="sc-required">*</span></label>
+          <input class="sc-input" type="email" id="sc-email" placeholder="amelia@centre.com.au" autocomplete="email" maxlength="150">
+          <div class="sc-err" id="sc-email-err"></div>
+        </div>
+        <div class="sc-group">
+          <label class="sc-label" for="sc-phone">Phone Number</label>
+          <input class="sc-input" type="tel" id="sc-phone" placeholder="0400 000 000" autocomplete="tel" maxlength="20">
+        </div>
+        <div class="sc-group">
+          <label class="sc-label" for="sc-role">Primary Role <span class="sc-required">*</span></label>
+          <select class="sc-sel" id="sc-role">
+            <option value="">&#x2014; Select your role &#x2014;</option>
+            <option>Centre Director</option>
+            <option>Assistant Director</option>
+            <option>Early Childhood Teacher (ECT)</option>
+            <option>Room Leader</option>
+            <option>Qualified Educator (Diploma)</option>
+            <option>Certificate III Educator</option>
+            <option>Inclusion Support Educator</option>
+            <option>Trainee / Apprentice</option>
+            <option>Administration Officer</option>
+            <option>Cook / Kitchen Staff</option>
+            <option>Other</option>
+          </select>
+          <div class="sc-err" id="sc-role-err"></div>
+        </div>
+        <div class="sc-group">
+          <label class="sc-label" for="sc-basis">Employment Type <span class="sc-required">*</span></label>
+          <select class="sc-sel" id="sc-basis">
+            <option value="">&#x2014; Select type &#x2014;</option>
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Casual">Casual</option>
+            <option value="Contractor">Contractor</option>
+          </select>
+          <div class="sc-err" id="sc-basis-err"></div>
+        </div>
+        <div class="sc-group">
+          <label class="sc-label" for="sc-cert">Qualification (optional)</label>
+          <input class="sc-input" type="text" id="sc-cert" placeholder="e.g. Diploma ECE, Certificate III, Bachelor" maxlength="80">
+        </div>
+      </div>
+    </div>
+
+    <div class="sc-card">
+      <div class="sc-card-head">
+        <div class="sc-card-icon">📅</div>
+        <div>
+          <div class="sc-card-title">Weekly Availability</div>
+          <div class="sc-card-sub">Set your status and preferred working hours for each day</div>
+        </div>
+      </div>
+      <div class="sc-avail-wrap">
+        <table class="sc-avail-tbl">
+          <thead><tr><th>Day</th><th>Status</th><th>Start Time</th><th>End Time</th></tr></thead>
+          <tbody id="sc-avail-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sc-submit-card">
+      <div class="sc-submit-head">
+        <div class="sc-submit-icon">📎</div>
+        <div>
+          <div class="sc-submit-title">Submit Your Availability</div>
+          <div class="sc-submit-sub">One click &mdash; file downloads, email opens ready to send</div>
+        </div>
+      </div>
+      <div class="sc-two-step">
+        <div class="sc-two-step-item">
+          <div class="sc-two-step-num">1</div>
+          <div class="sc-two-step-body">
+            <strong>File downloads automatically</strong>
+            <p>Your availability is packaged as a <code style="font-family:'DM Mono',monospace;font-size:10px;color:var(--c-accent)">.json</code> file and saved to your Downloads folder.</p>
+          </div>
+        </div>
+        <div class="sc-two-step-arrow">&#x2192;</div>
+        <div class="sc-two-step-item">
+          <div class="sc-two-step-num">2</div>
+          <div class="sc-two-step-body">
+            <strong>Email opens &mdash; attach &amp; send</strong>
+            <p>Your email app opens addressed to your centre director. Attach the file and send.</p>
+          </div>
+        </div>
+      </div>
+      <button class="sc-cta" id="sc-submit-btn">
+        <span>📎</span><span>Download File &amp; Open Email</span>
+      </button>
+      <div class="sc-cta-note">
+        Your data stays on your device &nbsp;&middot;&nbsp; No server &nbsp;&middot;&nbsp; No tracking<br>
+        If your email app doesn&#8217;t open automatically, attach the downloaded file manually.
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="sc-success" id="sc-success">
+  <div class="sc-success-ring">🎉</div>
+  <h2>File Downloaded!</h2>
+  <p style="color:var(--c-text2);font-size:15px;max-width:460px;margin:0 auto">
+    Your availability file has been saved to your Downloads folder. Now attach it to the email that just opened and send it to your centre director.
+  </p>
+  <div class="sc-success-steps">
+    <h3>Next Steps</h3>
+    <div class="sc-success-step">
+      <div class="sc-success-step-num">1</div>
+      <div>Find <strong id="sc-filename-display" style="color:var(--c-accent);font-family:'DM Mono',monospace;font-size:11px"></strong> in your <strong>Downloads</strong> folder.</div>
+    </div>
+    <div class="sc-success-step">
+      <div class="sc-success-step-num">2</div>
+      <div>Switch to your <strong>email app</strong> &mdash; the message to your centre director should be open.</div>
+    </div>
+    <div class="sc-success-step">
+      <div class="sc-success-step-num">3</div>
+      <div>Click the <strong>attachment icon</strong>, locate the downloaded file, and attach it.</div>
+    </div>
+    <div class="sc-success-step">
+      <div class="sc-success-step-num">4</div>
+      <div>Click <strong>Send</strong>. Your director will import your availability into the Childcare Roster.</div>
+    </div>
+  </div>
+  <button class="sc-btn-ghost" id="sc-reset-btn">&#x21A9; Edit &amp; Resubmit</button>
+</div>
+
+<footer class="sc-footer">
+  <span>Childcare Roster Companion &middot; Educator Availability Form v2.1</span>
+  <span>No data leaves this page until you send the email</span>
+</footer>
+
+<div id="sc-toasts"></div>
+
+<!-- Service Worker Registration -->
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js').then(function(reg) {
+      console.log('✓ Service Worker registered');
+    }).catch(function(err) {
+      console.warn('Service Worker registration failed:', err);
+    });
+  }
+</script>
+
+<!-- Load Modules (no inline event handlers) -->
+<script src="js/sanitisation.js"></script>
+<script src="js/app.js"></script>
+
+<div class="pbp-brand">ProductivityByPhil — Childcare &amp; Early Learning Edition &mdash; Secure PWA v2.1</div>
+</body>
+</html>
