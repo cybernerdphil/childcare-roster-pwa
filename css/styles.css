@@ -1,100 +1,6 @@
 /* ─────────────────────────────────────────────────────────────
-   ROOT THEME
+   TABLE
    ───────────────────────────────────────────────────────────── */
-
-:root {
-  --c-bg: #0d0900;
-  --c-surface: #1a1200;
-  --c-surface2: #221800;
-  --c-border: #3a2e00;
-  --c-text: #f0e8cc;
-  --c-accent: #d09020;
-  --c-accent-dark: #a06c15;
-
-  --radius: 10px;
-  --shadow: 0 4px 14px rgba(0,0,0,0.35);
-  --font: 'Inter', system-ui, sans-serif;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   GLOBAL
-   ───────────────────────────────────────────────────────────── */
-
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--c-bg);
-  color: var(--c-text);
-  font-family: var(--font);
-  -webkit-font-smoothing: antialiased;
-}
-
-body {
-  padding-bottom: 80px;
-}
-
-h1, h2 {
-  margin: 0 0 12px;
-  font-weight: 600;
-}
-
-label {
-  display: block;
-  margin: 12px 0 6px;
-  font-size: 14px;
-  opacity: 0.9;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: var(--radius);
-  border: 1px solid var(--c-border);
-  background: var(--c-surface2);
-  color: var(--c-text);
-  font-size: 15px;
-  transition: border 0.2s, box-shadow 0.2s;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: var(--c-accent);
-  box-shadow: 0 0 0 3px rgba(208,144,32,0.25);
-  outline: none;
-}
-
-textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   HEADER
-   ───────────────────────────────────────────────────────────── */
-
-.sc-header {
-  padding: 24px 20px;
-  background: var(--c-surface);
-  border-bottom: 1px solid var(--c-border);
-  text-align: center;
-}
-
-.sc-subtitle {
-  margin-top: 4px;
-  opacity: 0.8;
-  font-size: 14px;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   SECTIONS
-   ───────────────────────────────────────────────────────────── */
-
-.sc-section {
-  background: var(--c-surface);
-  margin: 20px;
-  padding: 20px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
 
 /* ─────────────────────────────────────────────────────────────
    TABLE
@@ -114,110 +20,17 @@ textarea {
   font-weight: 600;
 }
 
-.sc-table td {
-  padding: 10px;
-  border-bottom: 1px solid var(--c-border);
-}
-
 .sc-table select {
   width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  min-height: 48px;
+  appearance: none;
+  -webkit-appearance: none;
 }
+
+
 
 /* ─────────────────────────────────────────────────────────────
    BUTTONS
    ───────────────────────────────────────────────────────────── */
-
-.sc-btn-primary {
-  width: calc(100% - 40px);
-  margin: 20px;
-  padding: 14px;
-  background: var(--c-accent);
-  border: none;
-  border-radius: var(--radius);
-  color: #000;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  transition: background 0.2s;
-}
-
-.sc-btn-primary:hover {
-  background: var(--c-accent-dark);
-}
-
-.sc-btn-secondary {
-  padding: 12px 20px;
-  background: var(--c-surface2);
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius);
-  color: var(--c-text);
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.sc-btn-secondary:hover {
-  background: var(--c-surface);
-}
-
-/* ─────────────────────────────────────────────────────────────
-   SUCCESS SCREEN
-   ───────────────────────────────────────────────────────────── */
-
-.sc-success-screen {
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.hidden {
-  display: none;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   TOASTS
-   ───────────────────────────────────────────────────────────── */
-
-.sc-toast-container {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 40px);
-  max-width: 400px;
-  z-index: 9999;
-}
-
-.sc-toast {
-  padding: 14px 16px;
-  margin-top: 10px;
-  border-radius: var(--radius);
-  background: var(--c-surface2);
-  border-left: 4px solid var(--c-accent);
-  box-shadow: var(--shadow);
-  opacity: 1;
-  transition: opacity 0.3s;
-}
-
-.sc-toast-error {
-  border-left-color: #ff4d4d;
-}
-
-.sc-toast.fade {
-  opacity: 0;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   RESPONSIVE
-   ───────────────────────────────────────────────────────────── */
-
-@media (max-width: 640px) {
-  .sc-section {
-    margin: 16px;
-    padding: 16px;
-  }
-
-  .sc-btn-primary {
-    width: calc(100% - 32px);
-    margin: 16px;
-  }
-}
