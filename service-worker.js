@@ -21,7 +21,6 @@ const PRECACHE_URLS = [
   './index.html',
   './css/styles.css',
   './js/app.js',
-  './js/sanitisation.js',
   './manifest.json'
 ];
 
