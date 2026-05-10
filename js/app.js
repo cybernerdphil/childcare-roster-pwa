@@ -34,26 +34,22 @@
 
   const FORM_SCHEMA = {
     managerEmail: {
-      type: 'string',
       required: true,
       maxLen: 150,
       validate: SEC.isValidEmail,
       sanitize: (val) => SEC.stripDangerousChars(val, 150)
     },
     name: {
-      type: 'string',
       required: true,
       maxLen: 150,
       sanitize: (val) => SEC.stripDangerousChars(val, 150)
     },
     phone: {
-      type: 'string',
       required: true,
       maxLen: 20,
       sanitize: (val) => SEC.stripDangerousChars(val, 20)
     },
     notes: {
-      type: 'string',
       required: false,
       maxLen: 500,
       sanitize: (val) => SEC.stripDangerousChars(val, 500)
@@ -63,7 +59,6 @@
   // ─────────────────────────────────────────────────────────────
   // DOM ELEMENTS
   // ─────────────────────────────────────────────────────────────
-  const form = document.getElementById('sc-form');
   const tableBody = document.getElementById('sc-table-body');
   const submitBtn = document.getElementById('sc-submit');
   const successScreen = document.getElementById('sc-success');
@@ -158,5 +153,93 @@
       const field = document.getElementById(`sc-${key}`);
       const schema = FORM_SCHEMA[key];
       const raw = field.value || '';
+      const clean = schema.sanitize(raw);
 
-      const clean = schema.s
+      if (schema.required && !clean.trim()) {
+        valid = false;
+        showToast(`${key} is required`, 'error');
+      }
+
+      if (schema.validate && !schema.validate(clean)) {
+        valid = false;
+        showToast(`${key} is invalid`, 'error');
+      }
+    });
+
+    return valid;
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // BUILD PAYLOAD
+  // ─────────────────────────────────────────────────────────────
+  function buildPayload() {
+    const payload = {
+      managerEmail: SEC.stripDangerousChars(
+        document.getElementById('sc-managerEmail').value,
+        150
+      ),
+      name: SEC.stripDangerousChars(
+        document.getElementById('sc-name').value,
+        150
+      ),
+      phone: SEC.stripDangerousChars(
+        document.getElementById('sc-phone').value,
+        20
+      ),
+      notes: SEC.stripDangerousChars(
+        document.getElementById('sc-notes').value,
+        500
+      ),
+      availability: {}
+    };
+
+    DAYS.forEach((day) => {
+      payload.availability[day.key] = {
+        start: document.getElementById(`sc-start-${day.key}`).value,
+        end: document.getElementById(`sc-end-${day.key}`).value,
+        status: document.getElementById(`sc-status-${day.key}`).value
+      };
+    });
+
+    return payload;
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // SUBMIT HANDLER
+  // ─────────────────────────────────────────────────────────────
+  submitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    const payload = buildPayload();
+    const json = JSON.stringify(payload, null, 2);
+
+    // Download JSON
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `availability-${payload.name}.json`;
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+    // Email
+    const mail = encodeURIComponent(payload.managerEmail);
+    const subject = encodeURIComponent('Weekly Availability');
+    const body = encodeURIComponent(
+      `Hi,\n\nPlease find my availability attached.\n\n${json}`
+    );
+
+    window.location.href = `mailto:${mail}?subject=${subject}&body=${body}`;
+
+    successScreen.classList.remove('hidden');
+  });
+
+  // ─────────────────────────────────────────────────────────────
+  // INIT
+  // ─────────────────────────────────────────────────────────────
+  buildAvailabilityTable();
+})();
